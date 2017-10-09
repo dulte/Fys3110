@@ -1,0 +1,372 @@
+\documentclass[a4paper,norsk, 10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[norsk]{babel}
+\usepackage{a4wide}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage[dvips]{epsfig}
+\usepackage[toc,page]{appendix}
+\usepackage[T1]{fontenc}
+\usepackage{cite} % [2,3,4] --> [2--4]
+\usepackage{shadow}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{marvosym }
+\usepackage{subcaption}
+\usepackage[noabbrev]{cleveref}
+\usepackage{cite}
+\usepackage{physics}
+
+
+\setlength{\droptitle}{-10em}   % This is your set screw
+
+\setcounter{tocdepth}{2}
+
+\lstset{language=c++}
+\lstset{alsolanguage=[90]Fortran}
+\lstset{alsolanguage=Python}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\title{Fys3310 Hjemmeeksamen}
+\author{Kadnr.: }
+\begin{document}
+\maketitle
+
+\section{Exercise 1:}
+\subsection{1.4)}
+For the Hadamard gate (H-gate) we have the following operation:
+
+\begin{equation}
+H = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\end{equation}\label{eq:H}
+
+We can look at its properties. First we find the hermitian transform of $H$:
+
+\begin{equation}
+H^\dagger = (H^T)^* = 
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+= H
+\end{equation}
+
+Thus showing that $H$ is hermitian. If we multiply $H$ with it self we get
+
+\begin{equation}
+H^2 = \frac{1}{2}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+=\frac{1}{2}
+\begin{pmatrix}
+2 & 0 \\
+0 & 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\end{equation}
+
+This means that $H^2 = I \Rightarrow H = H^{-1}$ and that $H$ is unitary.
+
+We can now see what $H$ does to qubit basis states
+
+\begin{equation}
+H\ket{0} = 
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\begin{pmatrix}
+0 \\1
+\end{pmatrix}
+= \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\ -1
+\end{pmatrix}
+\end{equation}
+\begin{equation}
+H\ket{1} = 
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix}
+= \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\ 1
+\end{pmatrix}
+\end{equation}
+
+
+We can recognize these as the eigenstates for spin in x-direction, so
+
+\begin{equation}
+H\ket{0} = \ket{\downarrow_x}
+\end{equation}\label{eq:toXdown}
+
+\begin{equation}
+H\ket{1} = \ket{\uparrow_x}
+\end{equation}\label{eq:toXup}
+
+
+\subsection{1.5)}
+We want to find a magnetic field that that results in the effect of $H$ found is eq. \eqref{eq:toXdown} and \eqref{eq:toXup}. We look at $H$ and see that
+
+\begin{equation}
+H = \frac{1}{\sqrt{2}}\left(\sigma_x + \sigma_z\right)
+\end{equation}
+
+So we make an educated guess that the magnetic field has to we in $\hat{i} + \hat{k}$ direction. So our Hamiltonian for the magnetic field will be:
+
+\begin{equation}
+\hat{H} = -\mathbf{\mu}\cdot \mathbf{B} = - g\frac{\mu_B}{\hbar}\left(\frac{h}{\sqrt{2}}\frac{\hbar}{2}\sigma_x + \frac{h}{\sqrt{2}}\frac{\hbar}{2}\sigma_z\right) = -g\frac{h\mu_B}{2\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\end{equation}
+
+With
+
+\begin{equation}
+\mathbf{B} = \frac{h}{\sqrt{2}}
+\begin{pmatrix}
+1 \\ 0 \\ 1
+\end{pmatrix}
+\end{equation}
+
+The $\sqrt{2}$ being there to ensure that the magnitude of $h$. 
+
+We now what to find the eigenstates of the Hamiltonian so we can express the time evolution of $\ket{0}$ and $\ket{1}$:
+
+\begin{equation}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\qquad
+\rightarrow
+\qquad
+\ket{h_1} = 
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix},
+\ket{h_2} = 
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+\end{equation}
+
+with eigenvalues
+
+\begin{equation}
+h_1 = \sqrt{2},\qquad h_2  = -\sqrt{2}
+\end{equation}
+
+This gives us the energies for the Hamiltonian
+
+\begin{equation}
+E_1 = -g\frac{h\mu_B}{2}, \qquad E_2 = g\frac{h\mu_B}{2}
+\end{equation}
+
+We can now express our qubit states as linear combinations of the eigenvalues of the Hamiltonian:
+
+\begin{equation}
+\ket{1} = a\ket{h_1} + b\ket{h_2}, \qquad \ket{0} = c\ket{h_1} + d\ket{h_2}
+\end{equation}
+
+This turns out to be
+
+\begin{equation}
+\ket{1} = \frac{\sqrt{2}}{4}
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix}
+-\frac{\sqrt{2}}{4}
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+\end{equation}
+\begin{equation}
+\ket{0} = \frac{2-\sqrt{2}}{4}
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix}
++\frac{2+\sqrt{2}}{4}
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+\end{equation}
+
+\section{Exercise 2:}
+
+\subsection{2.1)}
+
+
+\subsection{2.2)}
+
+We have the operators which works like
+
+\begin{equation}
+F\ket{i} = 
+\begin{cases}
+-\ket{i^*} & , i = i^* \\
+\ket{i} & , i \neq i^*
+\end{cases}
+\end{equation}\label{eq:Feffect}
+
+We want to show that $F$ can be written as
+
+\begin{equation}
+F = I - 2\ket{i^*}\bra{i^*}
+\end{equation}\label{eq:Foperator}
+
+Let's use the operator on a ket
+
+\begin{equation}
+F\ket{i} = (I - 2\ket{i^*}\bra{i^*})\ket{i} = I\ket{i} - 2\ket{i^*}\bra{i^*}\ket{i}
+\end{equation}
+
+\begin{equation}
+= \ket{i} - 2\delta_{i,i^*}\ket{i^*} =
+\begin{cases}
+-\ket{i^*} & , i = i^* \\
+\ket{i} & , i \neq i^*
+\end{cases}
+\end{equation}
+
+We can see that this gives the same as \eqref{eq:Feffect}, and we can therefore write $F = I - 2\ket{i^*}\bra{i^*}$.
+
+We can see from eq. \ref{eq:Foperator} that $F$ is a Householder transformation, which ensures that $F$ is unitary hermitian, but we can also show this:
+
+\begin{equation}
+F(F\ket{i}) = (I - 2\ket{i^*}\bra{i^*})(I - 2\ket{i^*}\bra{i^*})\ket{i}
+\end{equation}
+\begin{equation}
+= I\ket{i} - 2\ket{i^*}\bra{i^*}I\ket{i} -2I\ket{i^*}\bra{i^*}\ket{i} + 4\ket{i^*}\bra{i^*}\ket{i^*}\bra{i^*}\ket{i}
+\end{equation}
+\begin{equation}
+= \ket{i} - 4\ket{i^*}\bra{i^*}\ket{i} + 4\ket{i^*}\bra{i^*}\ket{i} = \ket{i}
+\end{equation}
+
+Thus $FF = I \Rightarrow F = F^{-1}$. We then show that $F$ is hermitian:
+
+\begin{equation}
+F^\dagger = (I - 2\ket{i^*}\bra{i^*})^\dagger = I - 2(\ket{i^*}\bra{i^*})^\dagger
+\end{equation}
+\begin{equation}
+= I - 2(\bra{i^*})^\dagger(\ket{i^*})^\dagger = I - 2\ket{i^*}\bra{i^*} = F
+\end{equation}
+
+So $F$ is hermitian, $F = F^\dagger$. This implies that $F$ is unitary hermitian:
+
+\begin{equation}
+F^{-1} = F = F^\dagger \Leftrightarrow F^\dagger = F^{-1}
+\end{equation}
+
+
+\subsection{2.3}
+We now introduce the superposition of the states $\ket{i}$
+
+\begin{equation}
+\ket{s} = \frac{1}{\sqrt{N}} \sum_{i=1}^N \ket{i}
+\end{equation}
+
+We then calculate 
+
+\begin{equation}
+\braket{i^*}{s} = \frac{1}{\sqrt{N}} \sum_{i=1}^N \braket{i^*}{i} = \frac{1}{\sqrt{N}} \sum_{i=1}^N \delta_{i,i^*} = \frac{1}{\sqrt{N}} 
+\end{equation}\label{eq:is}
+
+
+and
+
+\begin{equation}
+F\ket{s} = I\ket{s} - 2\ket{i^*}\bra{i^*}\ket{s} = \ket{s} - \frac{2}{\sqrt{N}}\ket{i^*}
+\end{equation}
+
+
+
+\subsection{2.4)}
+
+We now consider the state:
+
+\begin{equation}
+\ket{g} = \alpha \ket{s} + \beta\ket{i^*}
+\end{equation}
+
+We want this to be normalized:
+
+\begin{equation}
+\braket{g}{g} = 1
+\end{equation}
+
+Due to Riesz representation theorem, we know that such a bra $\bra{g}$ exist, so we can then find the condition for $\alpha$ and $\beta$ such that $\ket{g}$ is normalized.
+
+\begin{equation}
+(\alpha* \bra{s} + \beta*\bra{i^*})(\alpha \ket{s} + \beta\ket{i^*}) = |\alpha|^2 + |\beta|^2 + \alpha\beta* \braket{s}{i^*} + \alpha*\beta \braket{i^*}{s}
+\end{equation}
+
+$\alpha$ and $\beta$ are both real. We know that $\braket{i^*}{s}$ is real from \eqref{eq:is}, so $\braket{s}{i^*} = \braket{i^*}{s}* = \braket{i^*}{s}$. So: 
+
+\begin{equation}
+\alpha^2 + \beta^2 + \frac{2\alpha \beta}{\sqrt{N}} = 1
+\end{equation}
+
+Is the condition that makes sure that $\ket{g}$ is normalized.
+
+\subsection{2.5)}
+
+The operator for measuring the measurement $i$ of state $\ket{i}$ is named $X$, so $X$ acting on a state $\ket{i}$ is:
+
+\begin{equation}
+X\ket{i} = i\ket{i}
+\end{equation}
+
+meaning that $\ket{i}$ are eigenstates of $X$ with eigenvalue $i$. This means that we can use the spectral theorem to write $X$ as a spectral representation with $\ket{i}$ and $i$:
+
+\begin{equation}
+X = \sum_{j=1}^N j\ket{j}\bra{j}
+\end{equation}
+
+($j$ and $i$ are dummy indices and therefore interchanged).
+
+\subsection{2.6)}
+
+
+
+
+\end{document}
+
+

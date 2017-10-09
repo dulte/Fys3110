@@ -40,12 +40,131 @@
 \lstset{showstringspaces=false}
 \lstset{showtabs=false}
 \lstset{breaklines}
-\title{Fys3310 Hjemmeeksamen}
+\title{Fys3110 Hjemmeeksamen}
 \author{Kadnr.: }
 \begin{document}
 \maketitle
 
 \section{Exercise 1:}
+
+\subsection{1.1)}\label{sec:11}
+We have a qubit consisting of the two spin-1/2 basis states
+
+\begin{equation}
+\ket{0} \equiv \ket{\downarrow} \simeq 
+\begin{pmatrix}
+0 \\ 1
+\end{pmatrix}
+\end{equation}
+\begin{equation}
+\ket{1} \equiv \ket{\uparrow} \simeq 
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix}
+\end{equation}
+
+we then introduce the operator $\hat{\sigma}_x$ represented by the Pauli-matrix
+
+\begin{equation}
+\hat{\sigma}_x \simeq
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}
+\end{equation}
+
+We can then look at how the operator acts on the basis states:
+
+\begin{equation}
+\hat{\sigma}_x\ket{0} = 
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 \\ 1
+\end{pmatrix} = 
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} = \ket{1}
+\end{equation}
+
+\begin{equation}
+\hat{\sigma}_x\ket{1} = 
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix} = 
+\begin{pmatrix}
+0 \\ 1
+\end{pmatrix} = \ket{0}
+\end{equation}
+
+So the operator $\hat{\sigma}_x$ inverts the states:
+
+\begin{equation}
+\hat{\sigma}_x\ket{0} = \ket{1}, \qquad \hat{\sigma}_x\ket{1} = \ket{0}
+\end{equation}
+
+\subsection{1.2)}\label{sec:12}
+
+We have two states $\ket{i}$ and $\ket{o}$, and the operator $G$ which acts on the states as follows:
+
+\begin{equation}
+\ket{o} = G\ket{i}, \qquad \ket{i} = G\ket{o}
+\end{equation}
+
+We can see that 
+
+\begin{equation}
+G(G\ket{o}) = G\ket{i} = \ket{o}
+\end{equation}
+
+Thus we see that $GG = I \Rightarrow G = G^{-1}$. We can check if $G$ is hermitian looking at the definition of the hermitian conjugate for some operator $K$:
+
+\begin{equation}
+\bra{\psi}K\ket{\phi} = \bra{\phi}K^\dagger\ket{\psi}^*
+\end{equation}
+
+And if $K$ is hermitian then $K = K^\dagger$ and
+\begin{equation}
+\bra{\psi}K\ket{\phi} = \bra{\phi}K\ket{\psi}^*
+\end{equation}\label{eq:hermitDef}
+
+We can check if this holds for $G$. For this we calculate
+
+\begin{equation}
+\bra{o}G\ket{i} = \braket{o}{o}
+\end{equation}
+\begin{equation}
+\bra{i}G\ket{o}^* = \braket{i}{i}^* 
+\end{equation}
+
+But these qubits are normalized, so $\braket{i}{i}^*=  \braket{i}{i}=  \braket{o}{o} = 1$, and we there for get
+
+\begin{equation}
+\bra{o}G\ket{i} = 1 = \bra{i}G\ket{o}^*
+\end{equation}
+
+And thus we have used \eqref{eq:hermitDef} to show that $G$ is hermitian, $G = G^\dagger$. We have also shown that $G = G^{-1}$, but because $G$ under multiplication is a operator group, we are ensured that the identity is unique, and we an therefore conclude that $G^{-1} = G^\dagger$, which means that $G$ is unitary and hermitian.
+
+\subsection{1.3)}
+
+We want to find the NOT gate that switches the two states. But the operator $G$ from sec. \ref{sec:12} does exactly that: it switches $\ket{0}$ to $\ket{i}$ and vice versa. Also, we showed in sec. \ref{sec:11} that the operator $\hat{\sigma}_x$ represented as the Pauli-matrix, took a spin up to down, and down to up. We therefore know that $G$ is the operator for the NOT gate, represented by a Pauli-Matrix:
+
+\begin{equation}
+G = \hat{\sigma}_x =
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}
+\end{equation}
+
+And as shown in sec. \ref{sec:12}, this operator, $G$, is unitary hermitian.
+
 \subsection{1.4)}
 For the Hadamard gate (H-gate) we have the following operation:
 
@@ -314,7 +433,7 @@ and
 
 \begin{equation}
 F\ket{s} = I\ket{s} - 2\ket{i^*}\bra{i^*}\ket{s} = \ket{s} - \frac{2}{\sqrt{N}}\ket{i^*}
-\end{equation}
+\end{equation}\label{eq:Fs}
 
 
 
@@ -342,7 +461,7 @@ $\alpha$ and $\beta$ are both real. We know that $\braket{i^*}{s}$ is real from 
 
 \begin{equation}
 \alpha^2 + \beta^2 + \frac{2\alpha \beta}{\sqrt{N}} = 1
-\end{equation}
+\end{equation}\label{eq:conditionAB}
 
 Is the condition that makes sure that $\ket{g}$ is normalized.
 
@@ -364,8 +483,124 @@ X = \sum_{j=1}^N j\ket{j}\bra{j}
 
 \subsection{2.6)}
 
+We want to find the probability of measuring $i^*$ when observing $\ket{g}$. From $X$ we find
+
+\begin{equation}
+X\ket{i^*} = i^*\ket{i^*} 
+\end{equation}
+
+Meaning that $\ket{i^*}$ is the state where we measure $i^*$, meaning that we need to find the probability of measuring $\ket{g}$ in state $\ket{i^*}$. We d this with the projection operator
+
+\begin{equation}
+\hat{P} = \ketbra{i^*}{i^*}
+\end{equation}
+
+We then find the expectation value of $P$ acting on $\ket{g}$:
+
+\begin{equation}
+P(i^*) = \bra{g}\hat{P}\ket{g} = \bra{g}\ket{i^*}\bra{i^*}\ket{g} = |\braket{i^*}{g}|^2
+\end{equation}
+
+We can calculate this
+
+\begin{equation}
+\braket{i^*}{g} = \bra{i^*}(\alpha \ket{s} + \beta\ket{i^*}) = \alpha\braket{i^*}{s}+ \beta \braket{i^*}{i^*} = \frac{\alpha}{\sqrt{N}} + \beta
+\end{equation}
+
+All the terms are real, so the norm in the probability just becomes a power of two:
+
+\begin{equation}
+\Rightarrow P(i^*) = |\braket{i^*}{g}|^2 = \left(\frac{\alpha}{\sqrt{N}} + \beta\right)^2 = \frac{\alpha^2}{N} + \beta^2 + \frac{\alpha\beta}{\sqrt{N}}
+\end{equation}
+
+From eq. \eqref{eq:conditionAB} we see that
+
+\begin{equation}
+\beta^2 + \frac{2\alpha \beta}{\sqrt{N}}  = 1 - \alpha^2
+\end{equation}
+
+So we get that the probability of measuring $i^*$ becomes:
+
+\begin{equation}
+P(i^*) = 1 - \alpha^2\left(1 - \frac{1}{N}\right)
+\end{equation}
+
+\subsection{2.7)}
+
+We now introduce the operator
+
+\begin{equation}
+U = 2\ketbra{s}{s} - I
+\end{equation}\label{eq:U}
+
+We want to look at $UF\ket{s}$. We already calculated $F\ket{s}$\eqref{eq:Fs}, so we get: 
+
+\begin{equation}
+UF\ket{s} = U(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*})
+\end{equation}
+\begin{equation}
+= 2\ket{s}\braket{s}{s} - I\ket{s} - \frac{4}{\sqrt{N}}\ket{s}\braket{s}{i^*} + \frac{2}{\sqrt{N}}I\ket{i^*} = \ket{s} - \frac{4}{N}\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} 
+\end{equation}
+
+So
+
+\begin{equation}
+UF\ket{s} =  \left(1 - \frac{4}{N}\right)\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} 
+\end{equation}\label{eq:UFs}
 
 
+If we look at $U$\eqref{eq:U} we see that it too is a Householder transformation(with a negative sign), thus we know that it is unitary hermitian. A unitary always preserves the norm. So if we first apply $F$(which we showed was unitary) to $\ket{s}$, its norm is still $1$ ($\ket{s}$ is a normalized sum of normalized states). So when we then apply $U$, the norm is still $1$. Thus the norm of $UF\ket{s}$ is $1$. But we can also show this explicit:
+
+\begin{equation}
+\left[\left(1 - \frac{4}{N}\right)\bra{s} + \frac{2}{\sqrt{N}}\bra{i^*}\right]\left[\left(1 - \frac{4}{N}\right)\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*}\right]
+\end{equation}
+
+(remember that all the constants are real)
+
+\begin{equation}
+= \left(1 - \frac{4}{N}\right)^2\braket{s}{s} +\frac{2}{\sqrt{N}} \left(1 - \frac{4}{N}\right)\bra{s}\ket{i^*} + \frac{2}{\sqrt{N}} \left(1 - \frac{4}{N}\right)\bra{i^*}\ket{s} + \frac{4}{N}\braket{i^*}{i^*}
+\end{equation}
+
+\begin{equation}
+= \left(1 - \frac{4}{N}\right)^2 + \frac{4}{N}\left(1 - \frac{4}{N}\right) + \frac{4}{N}
+\end{equation}
+\begin{equation}
+= 1 - \frac{8}{N} + \frac{16}{N^2} + \frac{4}{N} - \frac{16}{N^2} + \frac{4}{N} = 1
+\end{equation}
+
+
+So we have showed that the norm of $UF\ket{s}$ is $1$.
+
+
+\subsection{2.8)}
+
+We now want to calculate $UF\ket{g}$:
+
+\begin{equation}
+UF\ket{g} = UF(\alpha\ket{s} + \beta\ket{i^*}) = \alpha UF\ket{s} + \beta UF\ket{i^*}
+\end{equation}
+
+We have already found $UF\ket{s}$\eqref{eq:UFs}, but we need to find
+
+\begin{equation}
+UF\ket{i^*} = -U\ket{i^*} = -(2\ketbra{s}{s} - I)\ket{i^*} = -2\ket{s}\braket{s}{i^*} + I\ket{i^*}
+\end{equation}
+\begin{equation}
+= \ket{i^*} - \frac{2}{\sqrt{N}}\ket{s}
+\end{equation}
+
+
+We can now combine these
+
+\begin{equation}
+\alpha UF\ket{s} + \beta UF\ket{i^*} = \alpha\left[\left(1 - \frac{4}{N}\right)\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} \right] + \beta\left[\ket{i^*} - \frac{2}{\sqrt{N}}\ket{s}\right]
+\end{equation}
+
+We can so sort these and find 
+
+\begin{equation}
+UF(\alpha\ket{s} + \beta\ket{i^*}) = \left[\alpha\left(1 - \frac{4}{N}\right) - \frac{2\beta}{\sqrt{N}}\right]\ket{s} + \left[\frac{2\alpha}{\sqrt{N}} + \beta\right]\ket{i^*}
+\end{equation}
 
 \end{document}
 

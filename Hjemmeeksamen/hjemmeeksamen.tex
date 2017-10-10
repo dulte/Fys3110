@@ -350,7 +350,7 @@ This turns out to be
 
 \section{Exercise 2:}
 
-\subsection{2.1)}
+\subsection{2.1)}\label{sec:21}
 
 
 \subsection{2.2)}
@@ -523,7 +523,7 @@ So we get that the probability of measuring $i^*$ becomes:
 
 \begin{equation}
 P(i^*) = 1 - \alpha^2\left(1 - \frac{1}{N}\right)
-\end{equation}
+\end{equation}\label{eq:prob}
 
 \subsection{2.7)}
 
@@ -600,7 +600,93 @@ We can so sort these and find
 
 \begin{equation}
 UF(\alpha\ket{s} + \beta\ket{i^*}) = \left[\alpha\left(1 - \frac{4}{N}\right) - \frac{2\beta}{\sqrt{N}}\right]\ket{s} + \left[\frac{2\alpha}{\sqrt{N}} + \beta\right]\ket{i^*}
+\end{equation}\label{eq:UFg}
+
+\subsection{2.9)}
+
+We can numerically compute the probability of measuring $i^*$ in the state $(UF)^n\ket{s}$. But as we can see from eq. \eqref{eq:UFs} we get a contribution from $\ket{i^*}$, and it gets the same form as $UF\ket{g}$, thus this is the same as calculating $(UF)^n\ket{g}$ with the initial conditions $\beta = 0$. We know from eq. \ref{eq:UFg} how this system evolve. We can write the coefficients in front of $\ket{s}$ and $\ket{i^*}$ as $\alpha_{new}$ and $\beta_{new}$ and get a simple algorithm for calculating evolution under $UF$\eqref{item:algo}. Each time we update the system we check the probability of measuring $i^*$ we found in \eqref{eq:prob}.
+
+We want to find for what $n$ we get $99\%$ of measuring $i^*$. To do this we simply exit the loop when this probability is reached, saving the $n$ at which this happens.
+
+The final algorithm looks like this:
+
+\begin{itemize}\label{item:algo}
+\item Start with $\alpha = 1$, $\beta = 0$
+\item loop over n:
+\subitem Calculate $\alpha_{new} = \left[\alpha\left(1 - \frac{4}{N}\right) - \frac{2\beta}{\sqrt{N}}\right]$ and $\beta_{new} = \left[\frac{2\alpha}{\sqrt{N}} + \beta\right]$
+\subitem Set $\alpha = \alpha_{new}$ and $\beta = \beta_{new}$
+\subitem Find the probability $P(i^*) = 1 - \alpha^2\left(1 - \frac{1}{N}\right)$
+\subitem If $P(i^*) \geq 0.99$:
+\subsubitem Save n
+\subsubitem Exit loop
+\end{itemize}
+
+The code is found at the end\ref{sec:code}.
+
+
+If we don't exit the loop after $P \neq 0.99$ but look at how the probability evolves:
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{P1e3.png}
+        \caption{Probability for $N = 10^3$}
+        \label{fig:P1e3}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{P1e4.png}
+        \caption{Probability for $N = 10^4$}
+        \label{fig:P1e4}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{P1e5.png}
+        \caption{Probability for $N = 10^5$}
+        \label{fig:P1e5}
+    \end{subfigure}
+    \caption{We can see that the probability of measuring $i^*$ actually goes as a sinusoidal function of $n$. This means that using $UF$ doesn't always imporove the probability, and that there are regoins where applying $UF$ actually lowers the probability. We also see that frequancy of this sinusoidal function increases with the number of unknown states $N$, and thus we need to apply $UF$ more times to get a better probability.}\label{fig:prob}
+\end{figure}
+
+
+We can then look at how many $n = n^*$ is necessary to get a probability $P(i^*)\geq 0.99$:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{pi.png}
+\caption{The number of times $n^*$ we need to apply $UF$ to get a probability $P(i^*)\geq 0.99$ }
+\end{figure}
+
+We can see that as $N$ increases, so does the number if times we need to apply $UF$ this number $n^*$. It looks quite like a square root, but we need to make sure. For this we use a log-log plot, this is because:
+
+\begin{equation}
+n^* = N^i \Rightarrow \log(n^*) = i\cdot \log(N)
 \end{equation}
+
+So we can use the log-log plot, find the slope and therefore find the order of N of which $n^*$ increases.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{logpi.png}
+\caption{This shows $\log(n^*)$ vs $\log(n)$ and clearly shows a straight line. The slope of this line is the order of $N$ at which $n^*$ increases.}
+\end{figure}
+
+
+If we use a normal finite difference on this curve(which is exact for a linear function), we find that slope is $\sim 0.503$. This is close enough to $1/2$ that we can conclude that
+
+\begin{equation}
+n^* \sim O(\sqrt{N})
+\end{equation}
+
+This is an immense improvement over the classical result from sec. \ref{sec:21}, but more on this below.
+
+
+\section{Code}\label{sec:code}
+\lstinputlisting{29.py}
+
 
 \end{document}
 

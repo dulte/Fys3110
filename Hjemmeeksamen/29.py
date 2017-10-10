@@ -1,16 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def get_alpha(beta,N):
-    return -(np.sqrt(N*(N-beta**2*(N-1))) + b*np.sqrt(N))/(N)
-
-
 alpha = 1
 beta = 0
 
 top_percentile = []
 
-Ns = np.logspace(3,5,800)
+Ns = np.logspace(3,5,800) #Ns for finding n* for P > 0.99
+#Ns = [1e3,1e4,1e5] #Ns for plotting the evolution of the probability
 for N in Ns:
     probs = []
     ns = []
@@ -27,20 +24,38 @@ for N in Ns:
 
         probs.append(p)
         ns.append(n)
-        if p >= 0.999:
+        """
+        Comment the if-statement before plotting the evolution of the
+        probability
+        """
+        if p >= 0.99:
              top_percentile.append(n)
              break
 
 
+"""Uncomment for plotting the evolution of the probability"""
+#    plt.plot(ns,probs)
+#    plt.title("Probability for N ={}".format(N))
+#    plt.xlabel("n")
+#    plt.ylabel(r"$P(i^*)$")
+#    plt.show()
 
-    # plt.plot(ns,probs)
-    # plt.title("For N ={}".format(N))
-    # plt.show()
 
+"""Comment all below before using the plot above"""
 log_top = np.log(np.array(top_percentile))
 log_Ns = np.log(Ns)
 
-print(np.mean((log_top[:-1] - log_top[1:])/(log_Ns[:-1] - log_Ns[1:])))
+print("The speed for looking up i* goes as N to the power of ", \
+      np.mean((log_top[:-1] - log_top[1:])/(log_Ns[:-1] - log_Ns[1:])))
 
 plt.loglog(Ns,top_percentile)
-plt.show()
+plt.title("Loglog plot of the evolution of the prbability")
+plt.xlabel("log(N)")
+plt.ylabel(r"$\log(n*)$")
+
+
+#plt.plot(Ns,top_percentile)
+#plt.title("Evolution of the prbability")
+#plt.xlabel("N")
+#plt.ylabel(r"$n*$")
+#plt.show()

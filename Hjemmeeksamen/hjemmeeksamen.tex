@@ -20,6 +20,7 @@
 \usepackage{subcaption}
 \usepackage[noabbrev]{cleveref}
 \usepackage{cite}
+\usepackage{mathtools}
 \usepackage{physics}
 
 
@@ -287,7 +288,7 @@ With
 
 The $\sqrt{2}$ being there to ensure that the magnitude of $h$. 
 
-We now what to find the eigenstates of the Hamiltonian so we can express the time evolution of $\ket{0}$ and $\ket{1}$:
+We now what to find the eigenstates of the Hamiltonian so we can express the time evolution of $\ket{0}$ and $\ket{1}$. This is simply done by using you favourite linear algebra program, in my case wolfram alpha:
 
 \begin{equation}
 \begin{pmatrix}
@@ -313,19 +314,21 @@ with eigenvalues
 h_1 = \sqrt{2},\qquad h_2  = -\sqrt{2}
 \end{equation}
 
+These eigenvectors are not normalized, but when we use them below to represent states, we get coefficients that normalizes the states. 
+
 This gives us the energies for the Hamiltonian
 
 \begin{equation}
 E_1 = -g\frac{h\mu_B}{2}, \qquad E_2 = g\frac{h\mu_B}{2}
 \end{equation}
 
-We can now express our qubit states as linear combinations of the eigenvalues of the Hamiltonian:
+We can now express our qubit states as linear combinations of the eigenvectors of the Hamiltonian:
 
 \begin{equation}
 \ket{1} = a\ket{h_1} + b\ket{h_2}, \qquad \ket{0} = c\ket{h_1} + d\ket{h_2}
 \end{equation}
 
-This turns out to be
+Inverting $2x2$ matrix given as $(h_1 h_2)$ we get the coefficients. This was also done with wolfram alpha:
 
 \begin{equation}
 \ket{1} = \frac{\sqrt{2}}{4}
@@ -361,7 +364,7 @@ e^{iEt/\hbar}
 1 - \sqrt{2} \\ 1
 \end{pmatrix}
 e^{-iEt/\hbar}
-\end{equation}
+\end{equation}\label{eq:upTime}
 \begin{equation}
 \ket{0(t)} = \frac{2-\sqrt{2}}{4}
 \begin{pmatrix}
@@ -373,7 +376,7 @@ e^{iEt/\hbar}
 1 - \sqrt{2} \\ 1
 \end{pmatrix}
 e^{-iEt/\hbar}
-\end{equation}
+\end{equation}\label{eq:downTime}
 
 Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these states have evolved into the states given by the H-gate, \eqref{eq:toXdown} and \eqref{eq:toXup}. We can do this two different ways: The first involves just comparing the components of the vectors, and then solving for $t$, but this leaves us with four equations for a single unknown. We can solve just one of these, but we want to be sure that all of the equations gives the same time $t = T$. The other way is to write these as linear combinations of $\ket{\uparrow _x}$ and $\ket{\downarrow _x}$. This will leave us with only two equations, one for $\ket{0(t)}$ and one for $\ket{1(t)}$. So lets do this. First:
 
@@ -435,7 +438,88 @@ We recognize that $\begin{pmatrix} 1\\1 \end{pmatrix} = \sqrt{2}\ket{\uparrow_x}
 
 And similarly
 
+\begin{equation}
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+= \sqrt{2}\ket{\uparrow_x} - \ket{\uparrow_x} - \ket{\downarrow_x}
+\end{equation}
 
+
+We can now rewrite \eqref{eq:downTime} and \eqref{eq:upTime}. We start with
+
+\begin{equation}
+\ket{1(t)} = \frac{\sqrt{2}}{4}\left(\left[\sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}\right] e^{iEt/\hbar} - \left[\sqrt{2}\ket{\uparrow_x} - \ket{\uparrow_x} - \ket{\downarrow_x}\right]e^{-iEt/\hbar}\right)
+\end{equation}
+\begin{equation}
+= \frac{\sqrt{2}}{4}\left(\sqrt{2}(e^{iEt/\hbar}- e^{-iEt/\hbar})\ket{\uparrow_x} + (e^{-iEt/\hbar}+ e^{iEt/\hbar})\ket{\uparrow_x} + (e^{-iEt/\hbar}+ e^{iEt/\hbar})\ket{\downarrow_x}\right)
+\end{equation}
+\begin{equation}
+=\frac{\sqrt{2}}{4}\left(-2\sqrt{2}i\sin(Et/\hbar)\ket{\uparrow_x} + 2\cos(Et/\hbar)\ket{\uparrow_x} +2 \cos(Et/\hbar)\ket{\downarrow_x}\right)
+\end{equation}
+
+But we know that we want the to evolve into $\ket{\uparrow_x}$ as we found in \eqref{eq:toXup}. We start by finding a time where we have no $\ket{\downarrow_x}$, in other words $\cos(Et/\hbar) = 0$ This gives us the time
+
+\begin{equation}
+t = T = \frac{(2n + 1)\pi\hbar}{2E}
+\end{equation}
+
+For this time we get that the state evolves to
+
+\begin{equation}
+\ket{1(t = T)} = 
+\pm i \ket{\uparrow_x}
+\end{equation}\label{eq:upEvolved}
+
+This is exactly what we wanted! But we see an extra $\pm i$, this is just an additional global phase induced by the magnetic field, and does not alter the physical state. Thus we have found the correct time for $H\ket{1}$. Now let us see if we get the same for $\ket{0}$:
+
+\begin{equation}
+\ket{0(t)} =
+\frac{1}{4}\left((2-\sqrt{2})\left[\sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}\right] e^{iEt/\hbar} + (2+\sqrt{2})\left[\sqrt{2}\ket{\uparrow_x} - \ket{\uparrow_x} - \ket{\downarrow_x}\right]e^{-iEt/\hbar}\right)
+\end{equation}
+
+\begin{equation}
+=\frac{1}{4}\bigg(2\sqrt{2}\ket{\uparrow_x}(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
++ 2\ket{\uparrow_x}(e^{-iEt/\hbar} - e^{iEt/\hbar}) + 
+\end{equation}
+\begin{equation}
+2(\ket{\uparrow_x} + \ket{\downarrow_x})(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
+-\sqrt{2}(\ket{\uparrow_x} + \ket{\downarrow_x})(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
+\bigg)
+\end{equation}
+
+\begin{equation}
+= \frac{1}{4}\left(4\sqrt{2}\cos(Et/\hbar) + 4i\sin(Et/\hbar)\ket{\downarrow_x} - 2\sqrt{2}(\ket{\uparrow_x} + \ket{\downarrow_x})\cos(Et/\hbar)\right)
+\end{equation}
+
+Again we known hat we what the state to evolve to, namely $\ket{\downarrow_x}$ \eqref{eq:toXdown}. So we need to remove all $\ket{\uparrow_x}$. Fortunately, like last time, this can be done be letting $\cos(Et/\hbar) = 0$. This is true for 
+
+\begin{equation}
+t = T = \frac{(2n + 1)\pi\hbar}{2E}
+\end{equation}
+
+Just like for $\ket{1(t)}$. We then get
+
+\begin{equation}
+\ket{0(t=T)} = \pm i \ket{\downarrow_x}
+\end{equation}\label{eq:downEvolved}
+
+Here again we see the same global phase, and since it doesn't change the physical state, the state has evolved as desired, and we have found the correct time.
+
+We got the same time for both $\ket{0(t)}$ and $\ket{1(t)}$.
+
+\begin{equation}
+T = \frac{(2n + 1)\pi\hbar}{2E}
+\end{equation}
+
+Since we can chose the integer $n$ the simplest thing is to set it to $0$. So in summary:
+
+
+To implement the H-gate we can send the qubit through a magnetic field of strength $h$ pointed in the $\frac{h}{\sqrt{2}}(\hat{i} + \hat{k})$ direction. The magnetic field is turned on at $t = 0$ and turned off at 
+
+\begin{equation}
+t  = T = \frac{\pi\hbar}{2E} = \frac{\pi \hbar}{g h \mu_B} = \frac{2m \pi}{g h e}
+\end{equation}
 
 \section{Exercise 2:}
 
@@ -781,5 +865,4 @@ This is an immense improvement over the classical result from sec. \ref{sec:21},
 
 
 \end{document}
-
 

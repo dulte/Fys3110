@@ -390,7 +390,7 @@ e^{-iEt/\hbar}
 
 Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these states have evolved into the states given by the H-gate, \eqref{eq:toXdown} and \eqref{eq:toXup}. We can do this two different ways: The first involves just comparing the components of the vectors, and then solving for $t$, but this leaves us with four equations for a single unknown. We can solve just one of these, but we want to be sure that all of the equations gives the same time $t = T$. The other way is to write these as linear combinations of $\ket{\uparrow _x}$ and $\ket{\downarrow _x}$. This will leave us with only two equations, one for $\ket{0(t)}$ and one for $\ket{1(t)}$. So lets do this. First:
 
-\begin{equation}
+\begin{equation*}
 \begin{pmatrix}
 1 + \sqrt{2} \\ 1
 \end{pmatrix}
@@ -402,8 +402,8 @@ Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these 
 \begin{pmatrix}
 0\\1
 \end{pmatrix}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 =(1+\sqrt{2})
 \frac{1}{2}\left[
 \begin{pmatrix}
@@ -423,13 +423,13 @@ Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these 
 1\\-1
 \end{pmatrix}
 \right]
-\end{equation}
+\end{equation*}
 
 
 We recognize that $\begin{pmatrix} 1\\1 \end{pmatrix} = \sqrt{2}\ket{\uparrow_x}$ and $\begin{pmatrix} 1\\-1 \end{pmatrix} = \sqrt{2}\ket{\downarrow_x}$
 
 
-\begin{equation}
+\begin{equation*}
 = (1+\sqrt{2})
 \frac{1}{2}\left[
 \sqrt{2}\ket{\uparrow_x}
@@ -441,7 +441,7 @@ We recognize that $\begin{pmatrix} 1\\1 \end{pmatrix} = \sqrt{2}\ket{\uparrow_x}
 \sqrt{2}\ket{\uparrow_x}
 -\sqrt{2}\ket{\downarrow_x}
 \right]
-\end{equation}
+\end{equation*}
 \begin{equation}
 = \sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}
 \end{equation}
@@ -458,12 +458,12 @@ And similarly
 
 We can now rewrite \eqref{eq:downTime} and \eqref{eq:upTime}. We start with
 
-\begin{equation}
+\begin{equation*}
 \ket{1(t)} = \frac{\sqrt{2}}{4}\left(\left[\sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}\right] e^{iEt/\hbar} - \left[\sqrt{2}\ket{\uparrow_x} - \ket{\uparrow_x} - \ket{\downarrow_x}\right]e^{-iEt/\hbar}\right)
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 = \frac{\sqrt{2}}{4}\left(\sqrt{2}(e^{iEt/\hbar}- e^{-iEt/\hbar})\ket{\uparrow_x} + (e^{-iEt/\hbar}+ e^{iEt/\hbar})\ket{\uparrow_x} + (e^{-iEt/\hbar}+ e^{iEt/\hbar})\ket{\downarrow_x}\right)
-\end{equation}
+\end{equation*}
 \begin{equation}
 =\frac{\sqrt{2}}{4}\left(-2\sqrt{2}i\sin(Et/\hbar)\ket{\uparrow_x} + 2\cos(Et/\hbar)\ket{\uparrow_x} +2 \cos(Et/\hbar)\ket{\downarrow_x}\right)
 \end{equation}
@@ -484,20 +484,20 @@ For this time we get that the state evolves to
 
 This is exactly what we wanted! But we see an extra $\pm i$. This is just an additional global phase induced by the magnetic field, and does not alter the physical state. Thus we have found the correct time for $H\ket{1}$. Now let us see if we get the same for $\ket{0}$:
 
-\begin{equation}
+\begin{equation*}
 \ket{0(t)} =
 \frac{1}{4}\left((2-\sqrt{2})\left[\sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}\right] e^{iEt/\hbar} + (2+\sqrt{2})\left[\sqrt{2}\ket{\uparrow_x} - \ket{\uparrow_x} - \ket{\downarrow_x}\right]e^{-iEt/\hbar}\right)
-\end{equation}
+\end{equation*}
 
-\begin{equation}
+\begin{equation*}
 =\frac{1}{4}\bigg(2\sqrt{2}\ket{\uparrow_x}(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
 + 2\ket{\uparrow_x}(e^{-iEt/\hbar} - e^{iEt/\hbar}) + 
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 2(\ket{\uparrow_x} + \ket{\downarrow_x})(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
 -\sqrt{2}(\ket{\uparrow_x} + \ket{\downarrow_x})(e^{iEt/\hbar} + e^{-iEt/\hbar}) 
 \bigg)
-\end{equation}
+\end{equation*}
 
 \begin{equation}
 = \frac{1}{4}\left(4\sqrt{2}\cos(Et/\hbar) + 4i\sin(Et/\hbar)\ket{\downarrow_x} - 2\sqrt{2}(\ket{\uparrow_x} + \ket{\downarrow_x})\cos(Et/\hbar)\right)
@@ -579,9 +579,9 @@ F = I - 2\ket{i^*}\bra{i^*}
 
 Let's use the operator on a ket
 
-\begin{equation}
+\begin{equation*}
 F\ket{i} = (I - 2\ket{i^*}\bra{i^*})\ket{i} = I\ket{i} - 2\ket{i^*}\bra{i^*}\ket{i}
-\end{equation}
+\end{equation*}
 
 \begin{equation}
 = \ket{i} - 2\delta_{i,i^*}\ket{i^*} =
@@ -595,21 +595,21 @@ We can see that this gives the same as eq. \eqref{eq:Feffect}, and we can theref
 
 We can see from eq. \ref{eq:Foperator} that $F$ is a Householder transformation, which ensures that $F$ is unitary hermitian, but we can also show this:
 
-\begin{equation}
+\begin{equation*}
 F(F\ket{i}) = (I - 2\ket{i^*}\bra{i^*})(I - 2\ket{i^*}\bra{i^*})\ket{i}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 = I\ket{i} - 2\ket{i^*}\bra{i^*}I\ket{i} -2I\ket{i^*}\bra{i^*}\ket{i} + 4\ket{i^*}\bra{i^*}\ket{i^*}\bra{i^*}\ket{i}
-\end{equation}
+\end{equation*}
 \begin{equation}
 = \ket{i} - 4\ket{i^*}\bra{i^*}\ket{i} + 4\ket{i^*}\bra{i^*}\ket{i} = \ket{i}
 \end{equation}
 
 Thus $FF = I \Rightarrow F = F^{-1}$. We then show that $F$ is hermitian:
 
-\begin{equation}
+\begin{equation*}
 F^\dagger = (I - 2\ket{i^*}\bra{i^*})^\dagger = I - 2(\ket{i^*}\bra{i^*})^\dagger
-\end{equation}
+\end{equation*}
 \begin{equation}
 = I - 2(\bra{i^*})^\dagger(\ket{i^*})^\dagger = I - 2\ket{i^*}\bra{i^*} = F
 \end{equation}
@@ -746,9 +746,9 @@ U = 2\ketbra{s}{s} - I
 
 We want to look at $UF\ket{s}$. We already calculated $F\ket{s}$, eq. \eqref{eq:Fs}, so we get: 
 
-\begin{equation}
+\begin{equation*}
 UF\ket{s} = U(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*}) = (2\ketbra{s}{s} - I)(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*})
-\end{equation}
+\end{equation*}
 \begin{equation}
 = 2\ket{s}\braket{s}{s} - I\ket{s} - \frac{4}{\sqrt{N}}\ket{s}\braket{s}{i^*} + \frac{2}{\sqrt{N}}I\ket{i^*} = \ket{s} - \frac{4}{N}\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} 
 \end{equation}
@@ -770,13 +770,13 @@ If we look at $U$, eq. \eqref{eq:U}, we see that it too is a Householder transfo
 
 (remember that all the constants are real)
 
-\begin{equation}
+\begin{equation*}
 = \left(1 - \frac{4}{N}\right)^2\braket{s}{s} +\frac{2}{\sqrt{N}} \left(1 - \frac{4}{N}\right)\bra{s}\ket{i^*} + \frac{2}{\sqrt{N}} \left(1 - \frac{4}{N}\right)\bra{i^*}\ket{s} + \frac{4}{N}\braket{i^*}{i^*}
-\end{equation}
+\end{equation*}
 
-\begin{equation}
+\begin{equation*}
 = \left(1 - \frac{4}{N}\right)^2 + \frac{4}{N}\left(1 - \frac{4}{N}\right) + \frac{4}{N}
-\end{equation}
+\end{equation*}
 \begin{equation}
 = 1 - \frac{8}{N} + \frac{16}{N^2} + \frac{4}{N} - \frac{16}{N^2} + \frac{4}{N} = 1
 \end{equation}

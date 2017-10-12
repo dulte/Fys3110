@@ -6,8 +6,9 @@ beta = 0
 
 top_percentile = []
 
-Ns = np.logspace(3,5,800) #Ns for finding n* for P > 0.99
-#Ns = [1e3,1e4,1e5] #Ns for plotting the evolution of the probability
+#Ns = np.logspace(3,5,800) #Ns for finding n* for P > 0.99
+Ns = [1e3,1e4,1e5] #Ns for plotting the evolution of the probability, and 
+                   # the table
 for N in Ns:
     probs = []
     ns = []
@@ -48,10 +49,16 @@ log_Ns = np.log(Ns)
 print("The speed for looking up i* goes as N to the power of ", \
       np.mean((log_top[:-1] - log_top[1:])/(log_Ns[:-1] - log_Ns[1:])))
 
+""" For making the table"""
+for n,N in zip(top_percentile,Ns):
+    print("---------")
+    print("N = {}, n* = {}".format(N,n))
+
 plt.loglog(Ns,top_percentile)
 plt.title("Loglog plot of the evolution of the prbability")
 plt.xlabel("log(N)")
 plt.ylabel(r"$\log(n*)$")
+plt.show()
 
 
 #plt.plot(Ns,top_percentile)

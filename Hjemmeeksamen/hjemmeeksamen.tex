@@ -23,6 +23,8 @@
 \usepackage{mathtools}
 \usepackage{physics}
 
+\usepackage[noabbrev]{cleveref}
+
 
 \setlength{\droptitle}{-10em}   % This is your set screw
 
@@ -42,7 +44,7 @@
 \lstset{showtabs=false}
 \lstset{breaklines}
 \title{Fys3110 Hjemmeeksamen}
-\author{Kadnr.: }
+\author{Kadnr.: 15222 }
 \begin{document}
 \maketitle
 
@@ -133,7 +135,8 @@ Thus we see that $GG = I \Rightarrow G = G^{-1}$. We can check if $G$ is hermiti
 And if $K$ is hermitian then $K = K^\dagger$ and
 \begin{equation}
 \bra{\psi}K\ket{\phi} = \bra{\phi}K\ket{\psi}^*
-\end{equation}\label{eq:hermitDef}
+\label{eq:hermitDef}
+\end{equation}
 
 We can check if this holds for $G$. For this we calculate
 
@@ -144,7 +147,7 @@ We can check if this holds for $G$. For this we calculate
 \bra{i}G\ket{o}^* = \braket{i}{i}^* 
 \end{equation}
 
-But these qubits are normalized, so $\braket{i}{i}^*=  \braket{i}{i}=  \braket{o}{o} = 1$, and we there for get
+But these qubits are normalized, so $\braket{i}{i}^*=  \braket{i}{i}=  \braket{o}{o} = 1$, and we therefore get
 
 \begin{equation}
 \bra{o}G\ket{i} = 1 = \bra{i}G\ket{o}^*
@@ -167,7 +170,7 @@ G = \hat{\sigma}_x =
 And as shown in sec. \ref{sec:12}, this operator, $G$, is unitary hermitian.
 
 \subsection{1.4)}
-For the Hadamard gate (H-gate) we have the following operation:
+For the Hadamard gate (H-gate) we have the following operator:
 
 \begin{equation}
 H = \frac{1}{\sqrt{2}}
@@ -175,9 +178,10 @@ H = \frac{1}{\sqrt{2}}
 1 & 1 \\
 1 & -1
 \end{pmatrix}
-\end{equation}\label{eq:H}
+\label{eq:H}
+\end{equation}
 
-We can look at its properties. First we find the hermitian transform of $H$:
+We can look at its properties. First we find the hermitian conjugate of $H$:
 
 \begin{equation}
 H^\dagger = (H^T)^* = 
@@ -213,7 +217,7 @@ H^2 = \frac{1}{2}
 \end{pmatrix}
 \end{equation}
 
-This means that $H^2 = I \Rightarrow H = H^{-1}$ and that $H$ is unitary.
+This means that $H^2 = I \Rightarrow H = H^{-1} \Rightarrow H^\dagger = H^{-1}$ and that $H$ is unitary.\\
 
 We can now see what $H$ does to qubit basis states
 
@@ -231,6 +235,7 @@ H\ket{0} =
 \begin{pmatrix}
 1 \\ -1
 \end{pmatrix}
+=\frac{1}{\sqrt{2}}\left(\ket{1} - \ket{0}\right)
 \end{equation}
 \begin{equation}
 H\ket{1} = 
@@ -246,18 +251,21 @@ H\ket{1} =
 \begin{pmatrix}
 1 \\ 1
 \end{pmatrix}
+=\frac{1}{\sqrt{2}}\left(\ket{1} + \ket{0}\right)
 \end{equation}
 
 
-We can recognize these as the eigenstates for spin in x-direction, so
+We can recognize these as the eigenstates for spin in x-direction (represented in the basis of spin in z-direction), so
 
 \begin{equation}
 H\ket{0} = \ket{\downarrow_x}
-\end{equation}\label{eq:toXdown}
+\label{eq:toXdown}
+\end{equation}
 
 \begin{equation}
 H\ket{1} = \ket{\uparrow_x}
-\end{equation}\label{eq:toXup}
+\label{eq:toXup}
+\end{equation}
 
 
 \subsection{1.5)}
@@ -286,9 +294,9 @@ With
 \end{pmatrix}
 \end{equation}
 
-The $\sqrt{2}$ being there to ensure that the magnitude of $h$. 
+The $\sqrt{2}$ being there to ensure that the magnitude is $h$. 
 
-We now what to find the eigenstates of the Hamiltonian so we can express the time evolution of $\ket{0}$ and $\ket{1}$. This is simply done by using you favourite linear algebra program, in my case wolfram alpha:
+We now what to find the eigenstates of the Hamiltonian so we can express the time evolution of $\ket{0}$ and $\ket{1}$. This is simply done by using our favourite linear algebra program, in my case wolfram alpha:
 
 \begin{equation}
 \begin{pmatrix}
@@ -364,8 +372,9 @@ e^{iEt/\hbar}
 1 - \sqrt{2} \\ 1
 \end{pmatrix}
 e^{-iEt/\hbar}
-\end{equation}\label{eq:upTime}
-\begin{equation}
+\label{eq:upTime}
+\end{equation}
+\begin{align}
 \ket{0(t)} = \frac{2-\sqrt{2}}{4}
 \begin{pmatrix}
 1 + \sqrt{2} \\ 1
@@ -376,7 +385,8 @@ e^{iEt/\hbar}
 1 - \sqrt{2} \\ 1
 \end{pmatrix}
 e^{-iEt/\hbar}
-\end{equation}\label{eq:downTime}
+\label{eq:downTime}
+\end{align}
 
 Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these states have evolved into the states given by the H-gate, \eqref{eq:toXdown} and \eqref{eq:toXup}. We can do this two different ways: The first involves just comparing the components of the vectors, and then solving for $t$, but this leaves us with four equations for a single unknown. We can solve just one of these, but we want to be sure that all of the equations gives the same time $t = T$. The other way is to write these as linear combinations of $\ket{\uparrow _x}$ and $\ket{\downarrow _x}$. This will leave us with only two equations, one for $\ket{0(t)}$ and one for $\ket{1(t)}$. So lets do this. First:
 
@@ -458,7 +468,7 @@ We can now rewrite \eqref{eq:downTime} and \eqref{eq:upTime}. We start with
 =\frac{\sqrt{2}}{4}\left(-2\sqrt{2}i\sin(Et/\hbar)\ket{\uparrow_x} + 2\cos(Et/\hbar)\ket{\uparrow_x} +2 \cos(Et/\hbar)\ket{\downarrow_x}\right)
 \end{equation}
 
-But we know that we want the to evolve into $\ket{\uparrow_x}$ as we found in \eqref{eq:toXup}. We start by finding a time where we have no $\ket{\downarrow_x}$, in other words $\cos(Et/\hbar) = 0$ This gives us the time
+But we know that we want the to evolve into $\ket{\uparrow_x}$ as we found in eq. \eqref{eq:toXup}. We start by finding a time where we have no $\ket{\downarrow_x}$, in other words $\cos(Et/\hbar) = 0$ This gives us the time
 
 \begin{equation}
 t = T = \frac{(2n + 1)\pi\hbar}{2E}
@@ -469,9 +479,10 @@ For this time we get that the state evolves to
 \begin{equation}
 \ket{1(t = T)} = 
 \pm i \ket{\uparrow_x}
-\end{equation}\label{eq:upEvolved}
+\label{eq:upEvolved}
+\end{equation}
 
-This is exactly what we wanted! But we see an extra $\pm i$, this is just an additional global phase induced by the magnetic field, and does not alter the physical state. Thus we have found the correct time for $H\ket{1}$. Now let us see if we get the same for $\ket{0}$:
+This is exactly what we wanted! But we see an extra $\pm i$. This is just an additional global phase induced by the magnetic field, and does not alter the physical state. Thus we have found the correct time for $H\ket{1}$. Now let us see if we get the same for $\ket{0}$:
 
 \begin{equation}
 \ket{0(t)} =
@@ -492,7 +503,7 @@ This is exactly what we wanted! But we see an extra $\pm i$, this is just an add
 = \frac{1}{4}\left(4\sqrt{2}\cos(Et/\hbar) + 4i\sin(Et/\hbar)\ket{\downarrow_x} - 2\sqrt{2}(\ket{\uparrow_x} + \ket{\downarrow_x})\cos(Et/\hbar)\right)
 \end{equation}
 
-Again we known hat we what the state to evolve to, namely $\ket{\downarrow_x}$ \eqref{eq:toXdown}. So we need to remove all $\ket{\uparrow_x}$. Fortunately, like last time, this can be done be letting $\cos(Et/\hbar) = 0$. This is true for 
+Again we known hat we what the state to evolve to, namely $\ket{\downarrow_x}$, eq. \eqref{eq:toXdown}. So we need to remove all $\ket{\uparrow_x}$. Fortunately, like last time, this can be done be letting $\cos(Et/\hbar) = 0$. This is true for 
 
 \begin{equation}
 t = T = \frac{(2n + 1)\pi\hbar}{2E}
@@ -502,7 +513,8 @@ Just like for $\ket{1(t)}$. We then get
 
 \begin{equation}
 \ket{0(t=T)} = \pm i \ket{\downarrow_x}
-\end{equation}\label{eq:downEvolved}
+\label{eq:downEvolved}
+\end{equation}
 
 Here again we see the same global phase, and since it doesn't change the physical state, the state has evolved as desired, and we have found the correct time.
 
@@ -521,10 +533,29 @@ To implement the H-gate we can send the qubit through a magnetic field of streng
 t  = T = \frac{\pi\hbar}{2E} = \frac{\pi \hbar}{g h \mu_B} = \frac{2m \pi}{g h e}
 \end{equation}
 
+The resulting state is then the same as for the $H$ operator.
+
 \section{Exercise 2:}
 
 \subsection{2.1)}\label{sec:21}
 
+We have a boolean function
+
+\begin{equation}
+f(i)=
+\begin{cases}
+True, & i = i^* \\
+False, & i \neq i^*
+\end{cases}
+\end{equation}
+
+If we have a set of values $i = \{1,\ldots, N\}$. We will for large $N$ use $n = \frac{N}{2}$ applications of $f$ on average to find $i = i^*$. This is contingent on that the probability of guessing correct is always $1/N$. In that case
+
+\begin{equation}
+\langle n \rangle = \sum_n nP(n) = \sum_n n \frac{1}{N} = \frac{1}{N}\sum_n n = \frac{N+1}{2} \approx \frac{N}{2}
+\end{equation}
+
+There may be some approximations in this calculations, but it is intuitive that the average number of applications are on the order of $O(N)$.
 
 \subsection{2.2)}
 
@@ -536,13 +567,15 @@ F\ket{i} =
 -\ket{i^*} & , i = i^* \\
 \ket{i} & , i \neq i^*
 \end{cases}
-\end{equation}\label{eq:Feffect}
+\label{eq:Feffect}
+\end{equation}
 
 We want to show that $F$ can be written as
 
 \begin{equation}
 F = I - 2\ket{i^*}\bra{i^*}
-\end{equation}\label{eq:Foperator}
+\label{eq:Foperator}
+\end{equation}
 
 Let's use the operator on a ket
 
@@ -558,7 +591,7 @@ F\ket{i} = (I - 2\ket{i^*}\bra{i^*})\ket{i} = I\ket{i} - 2\ket{i^*}\bra{i^*}\ket
 \end{cases}
 \end{equation}
 
-We can see that this gives the same as \eqref{eq:Feffect}, and we can therefore write $F = I - 2\ket{i^*}\bra{i^*}$.
+We can see that this gives the same as eq. \eqref{eq:Feffect}, and we can therefore write $F = I - 2\ket{i^*}\bra{i^*}$.
 
 We can see from eq. \ref{eq:Foperator} that $F$ is a Householder transformation, which ensures that $F$ is unitary hermitian, but we can also show this:
 
@@ -599,14 +632,16 @@ We then calculate
 
 \begin{equation}
 \braket{i^*}{s} = \frac{1}{\sqrt{N}} \sum_{i=1}^N \braket{i^*}{i} = \frac{1}{\sqrt{N}} \sum_{i=1}^N \delta_{i,i^*} = \frac{1}{\sqrt{N}} 
-\end{equation}\label{eq:is}
+\label{eq:is}
+\end{equation}
 
 
 and
 
 \begin{equation}
 F\ket{s} = I\ket{s} - 2\ket{i^*}\bra{i^*}\ket{s} = \ket{s} - \frac{2}{\sqrt{N}}\ket{i^*}
-\end{equation}\label{eq:Fs}
+\label{eq:Fs}
+\end{equation}
 
 
 
@@ -627,20 +662,21 @@ We want this to be normalized:
 Due to Riesz representation theorem, we know that such a bra $\bra{g}$ exist, so we can then find the condition for $\alpha$ and $\beta$ such that $\ket{g}$ is normalized.
 
 \begin{equation}
-(\alpha* \bra{s} + \beta*\bra{i^*})(\alpha \ket{s} + \beta\ket{i^*}) = |\alpha|^2 + |\beta|^2 + \alpha\beta* \braket{s}{i^*} + \alpha*\beta \braket{i^*}{s}
+(\alpha^* \bra{s} + \beta^*\bra{i^*})(\alpha \ket{s} + \beta\ket{i^*}) = |\alpha|^2 + |\beta|^2 + \alpha\beta^* \braket{s}{i^*} + \alpha^*\beta \braket{i^*}{s} = 1
 \end{equation}
 
-$\alpha$ and $\beta$ are both real. We know that $\braket{i^*}{s}$ is real from \eqref{eq:is}, so $\braket{s}{i^*} = \braket{i^*}{s}* = \braket{i^*}{s}$. So: 
+$\alpha$ and $\beta$ are both real. We know that $\braket{i^*}{s}$ is real from eq. \eqref{eq:is}, so $\braket{s}{i^*} = \braket{i^*}{s}^* = \braket{i^*}{s}$. So: 
 
 \begin{equation}
 \alpha^2 + \beta^2 + \frac{2\alpha \beta}{\sqrt{N}} = 1
-\end{equation}\label{eq:conditionAB}
+\label{eq:conditionAB}
+\end{equation}
 
 Is the condition that makes sure that $\ket{g}$ is normalized.
 
 \subsection{2.5)}
 
-The operator for measuring the measurement $i$ of state $\ket{i}$ is named $X$, so $X$ acting on a state $\ket{i}$ is:
+The operator for measuring the measurement $i$ of state $\ket{i}$ is named $X$, so $X$ acting on a state $\ket{i}$ should be:
 
 \begin{equation}
 X\ket{i} = i\ket{i}
@@ -659,10 +695,10 @@ X = \sum_{j=1}^N j\ket{j}\bra{j}
 We want to find the probability of measuring $i^*$ when observing $\ket{g}$. From $X$ we find
 
 \begin{equation}
-X\ket{i^*} = i^*\ket{i^*} 
+X\ket{i^*} =\sum_{j=1}^N j\ket{j}\bra{j}\ket{i^*} = \sum_{j=1}^N j\ket{j}\delta_{j,i^*} = i^*\ket{i^*} 
 \end{equation}
 
-Meaning that $\ket{i^*}$ is the state where we measure $i^*$, meaning that we need to find the probability of measuring $\ket{g}$ in state $\ket{i^*}$. We d this with the projection operator
+Meaning that $\ket{i^*}$ is the state where we measure $i^*$, meaning that we need to find the probability of measuring $\ket{g}$ in state $\ket{i^*}$. We do this with the projection operator
 
 \begin{equation}
 \hat{P} = \ketbra{i^*}{i^*}
@@ -680,10 +716,10 @@ We can calculate this
 \braket{i^*}{g} = \bra{i^*}(\alpha \ket{s} + \beta\ket{i^*}) = \alpha\braket{i^*}{s}+ \beta \braket{i^*}{i^*} = \frac{\alpha}{\sqrt{N}} + \beta
 \end{equation}
 
-All the terms are real, so the norm in the probability just becomes a power of two:
+All the terms are real, so the norm in the probability just becomes:
 
 \begin{equation}
-\Rightarrow P(i^*) = |\braket{i^*}{g}|^2 = \left(\frac{\alpha}{\sqrt{N}} + \beta\right)^2 = \frac{\alpha^2}{N} + \beta^2 + \frac{\alpha\beta}{\sqrt{N}}
+\Rightarrow P(i^*) = |\braket{i^*}{g}|^2 = \left(\frac{\alpha}{\sqrt{N}} + \beta\right)^2 = \frac{\alpha^2}{N} + \beta^2 + \frac{2\alpha\beta}{\sqrt{N}}
 \end{equation}
 
 From eq. \eqref{eq:conditionAB} we see that
@@ -696,7 +732,8 @@ So we get that the probability of measuring $i^*$ becomes:
 
 \begin{equation}
 P(i^*) = 1 - \alpha^2\left(1 - \frac{1}{N}\right)
-\end{equation}\label{eq:prob}
+\label{eq:prob}
+\end{equation}
 
 \subsection{2.7)}
 
@@ -704,12 +741,13 @@ We now introduce the operator
 
 \begin{equation}
 U = 2\ketbra{s}{s} - I
-\end{equation}\label{eq:U}
+\label{eq:U}
+\end{equation}
 
-We want to look at $UF\ket{s}$. We already calculated $F\ket{s}$\eqref{eq:Fs}, so we get: 
+We want to look at $UF\ket{s}$. We already calculated $F\ket{s}$, eq. \eqref{eq:Fs}, so we get: 
 
 \begin{equation}
-UF\ket{s} = U(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*})
+UF\ket{s} = U(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*}) = (2\ketbra{s}{s} - I)(\ket{s} - \frac{2}{\sqrt{N}}\ket{i^*})
 \end{equation}
 \begin{equation}
 = 2\ket{s}\braket{s}{s} - I\ket{s} - \frac{4}{\sqrt{N}}\ket{s}\braket{s}{i^*} + \frac{2}{\sqrt{N}}I\ket{i^*} = \ket{s} - \frac{4}{N}\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} 
@@ -719,12 +757,14 @@ So
 
 \begin{equation}
 UF\ket{s} =  \left(1 - \frac{4}{N}\right)\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*} 
-\end{equation}\label{eq:UFs}
+\label{eq:UFs}
+\end{equation}
 
 
-If we look at $U$\eqref{eq:U} we see that it too is a Householder transformation(with a negative sign), thus we know that it is unitary hermitian. A unitary always preserves the norm. So if we first apply $F$(which we showed was unitary) to $\ket{s}$, its norm is still $1$ ($\ket{s}$ is a normalized sum of normalized states). So when we then apply $U$, the norm is still $1$. Thus the norm of $UF\ket{s}$ is $1$. But we can also show this explicit:
+If we look at $U$, eq. \eqref{eq:U}, we see that it too is a Householder transformation(with a negative sign), thus we know that it is unitary hermitian. A unitary always preserves the norm. So if we first apply $F$(which we showed was unitary) to $\ket{s}$, its norm is still $1$ ($\ket{s}$ is a normalized sum of normalized states). So when we then apply $U$, the norm is still $1$. Thus the norm of $UF\ket{s}$ is $1$. But we can also show this explicit:
 
 \begin{equation}
+\bra{s}(UF)^\dagger UF\ket{s}=
 \left[\left(1 - \frac{4}{N}\right)\bra{s} + \frac{2}{\sqrt{N}}\bra{i^*}\right]\left[\left(1 - \frac{4}{N}\right)\ket{s} + \frac{2}{\sqrt{N}}\ket{i^*}\right]
 \end{equation}
 
@@ -742,7 +782,7 @@ If we look at $U$\eqref{eq:U} we see that it too is a Householder transformation
 \end{equation}
 
 
-So we have showed that the norm of $UF\ket{s}$ is $1$.
+So we have shown that the norm of $UF\ket{s}$ is $1$.
 
 
 \subsection{2.8)}
@@ -753,7 +793,7 @@ We now want to calculate $UF\ket{g}$:
 UF\ket{g} = UF(\alpha\ket{s} + \beta\ket{i^*}) = \alpha UF\ket{s} + \beta UF\ket{i^*}
 \end{equation}
 
-We have already found $UF\ket{s}$\eqref{eq:UFs}, but we need to find
+We have already found $UF\ket{s}$, eq. \eqref{eq:UFs}, but we need to find
 
 \begin{equation}
 UF\ket{i^*} = -U\ket{i^*} = -(2\ketbra{s}{s} - I)\ket{i^*} = -2\ket{s}\braket{s}{i^*} + I\ket{i^*}
@@ -773,17 +813,19 @@ We can so sort these and find
 
 \begin{equation}
 UF(\alpha\ket{s} + \beta\ket{i^*}) = \left[\alpha\left(1 - \frac{4}{N}\right) - \frac{2\beta}{\sqrt{N}}\right]\ket{s} + \left[\frac{2\alpha}{\sqrt{N}} + \beta\right]\ket{i^*}
-\end{equation}\label{eq:UFg}
+\label{eq:UFg}
+\end{equation}
 
 \subsection{2.9)}
 
-We can numerically compute the probability of measuring $i^*$ in the state $(UF)^n\ket{s}$. But as we can see from eq. \eqref{eq:UFs} we get a contribution from $\ket{i^*}$, and it gets the same form as $UF\ket{g}$, thus this is the same as calculating $(UF)^n\ket{g}$ with the initial conditions $\beta = 0$. We know from eq. \ref{eq:UFg} how this system evolve. We can write the coefficients in front of $\ket{s}$ and $\ket{i^*}$ as $\alpha_{new}$ and $\beta_{new}$ and get a simple algorithm for calculating evolution under $UF$\eqref{item:algo}. Each time we update the system we check the probability of measuring $i^*$ we found in \eqref{eq:prob}.
+We can numerically compute the probability of measuring $i^*$ in the state $(UF)^n\ket{s}$. As we can see from eq. \eqref{eq:UFs}, after the first application of $UF$ we get a contribution from $\ket{i^*}$, and it gets the same form as $UF\ket{g}$, thus this is the same as calculating $(UF)^n\ket{g}$ with the initial conditions $\alpha = 1$,$\beta = 0$. We know from eq. \ref{eq:UFg} how this system evolve. After each application of  $UF$, we can write the coefficients in front of $\ket{s}$ and $\ket{i^*}$ as $\alpha_{new}$ and $\beta_{new}$ and get a simple algorithm for calculating evolution under $UF$. Each time we update the system we calculate the probability of measuring $i^*$ we found in eq. \eqref{eq:prob}.
 
-We want to find for what $n$ we get $99\%$ of measuring $i^*$. To do this we simply exit the loop when this probability is reached, saving the $n$ at which this happens.
+We want to find for what $n=n^*$ we get $99\%$ probability of measuring $i^*$. To do this we simply exit the loop when this probability is reached, saving the $n$ at which this happens.
 
 The final algorithm looks like this:
 
-\begin{itemize}\label{item:algo}
+\begin{itemize}
+\label{item:algo}
 \item Start with $\alpha = 1$, $\beta = 0$
 \item loop over n:
 \subitem Calculate $\alpha_{new} = \left[\alpha\left(1 - \frac{4}{N}\right) - \frac{2\beta}{\sqrt{N}}\right]$ and $\beta_{new} = \left[\frac{2\alpha}{\sqrt{N}} + \beta\right]$
@@ -820,11 +862,29 @@ If we don't exit the loop after $P \neq 0.99$ but look at how the probability ev
         \caption{Probability for $N = 10^5$}
         \label{fig:P1e5}
     \end{subfigure}
-    \caption{We can see that the probability of measuring $i^*$ actually goes as a sinusoidal function of $n$. This means that using $UF$ doesn't always imporove the probability, and that there are regoins where applying $UF$ actually lowers the probability. We also see that frequancy of this sinusoidal function increases with the number of unknown states $N$, and thus we need to apply $UF$ more times to get a better probability.}\label{fig:prob}
+    \caption{We can see that the probability of measuring $i^*$ actually goes as a sinusoidal function of $n$. This means that using $UF$ doesn't always imporove the probability, and that there are regoins where applying $UF$ actually lowers the probability. We also see that frequancy of this sinusoidal function increases with the number of unknown states $N$, and thus we need  to apply $UF$ more times to get a better probability.}\label{fig:prob}
 \end{figure}
 
 
+We can see that for larger $N$ is takes more applications of $UF$ to get good probabilities.\footnote{This is actually the case for small $N$ also. This is because for small $N$ there is a secondary oscillation, which may not reach as high probability before $n$ is quite large.}\\
+
+\newpage
+
 We can then look at how many $n = n^*$ is necessary to get a probability $P(i^*)\geq 0.99$:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+$N$ & $n^*$\\
+\hline 
+$10^3$ & $23$\\
+$10^4$ & $74$\\
+$10^5$ & $233$
+\end{tabular}
+\caption{A table showing the many times $UF$ is applied, $n^*$, to get a probability $\geq 99\%$ to measure $i^*$.}
+\end{table}
+
+To see a clearer pattern we use $800$ points, and plots the result:
 
 \begin{figure}[H]
 \centering
@@ -832,7 +892,6 @@ We can then look at how many $n = n^*$ is necessary to get a probability $P(i^*)
 \caption{The number of times $n^*$ we need to apply $UF$ to get a probability $P(i^*)\geq 0.99$ }
 \end{figure}
 
-\textbf{TA MED TABELL SOM OPPGAVEN BER OM!!!!}
 
 
 We can see that as $N$ increases, so does the number if times we need to apply $UF$ this number $n^*$. It looks quite like a square root, but we need to make sure. For this we use a log-log plot, this is because:
@@ -860,6 +919,58 @@ n^* \sim O(\sqrt{N})
 This is an immense improvement over the classical result from sec. \ref{sec:21}, but more on this below.
 
 
+\subsection{2.10)}
+As shown in sec. \ref{sec:21} a classical algorithm for finding a member $i^*$ of a set or database scales like $O(N)$.
+
+We can instead use quantum mechanics. We can then make the set of values to a set of states $\ket{i}$. We then make a equal amplitude superposition state $\ket{s}$ of these states $\ket{i}$. We then apply the operator $UF$ to $\ket{s}$ we will get a state which is a superposition $\ket{s}$ and our target state $\ket{i^*}$, namely $\ket{g}$. We can then calculate the probability of measuring $\ket{g}$ in state $\ket{i^*}$. If this probability is to low, we apply $UF$ again. This makes a new superposition of $\ket{s}$ and $\ket{i^*}$(still $\ket{g}$ but with new coefficients) \ref{eq:UFg}. This is done until the desired probability is reached, $99\%$ in our case. When this probability is reached we can measure the system, and get the value $i^*$. This is called a 'Grover iteration'(more on this below).
+
+This is a quantum algorithm used in a quantum computer. And as we saw in the section above it manage to find $i^*$ in a database with $N$ entries with in a time that scales like $O(\sqrt{N})$. This is an immense improvement over the classical algorithm, and is the reason quantum computers are the future!
+\newpage
+
+\subsubsection{Testing}
+\textit{This section is far beyond what is asked for, and is more for the fun of it, but illustrates the efficiency of the quantum computer!}
+
+The above algorithm is called Grovers algorithm. It is simple to implement on a real quantum processor, and can be done with only 3 quantum gates: the well known Hadamard gate, the Pauli X-gate and a controlled-NOT gate. Schematically this is the setup:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{grover.png}
+\caption{Schematic drawing of the Grover algorithm. Taken from \emph{REF}}
+\end{figure}
+
+Finding this interesting I tried running this on the IBM ibmqx4 5 qubit processor. Due to the limited size of the processor I could only use $N=4$. But it is still impressive. Lets find how many iterations we need of $UF$. From \eqref{eq:UFg} we get (by starting with $\alpha = 1$, $\beta = 0$)
+
+\begin{equation}
+\alpha_{new} = \left[\left(1 - \frac{4}{N}\right) - \frac{2\cdot 0}{\sqrt{N}}\right] = 0, \qquad \beta_{new} = \left[\frac{2}{\sqrt{4}} + 0\right] = 1
+\end{equation}
+
+This means that only after one(!) use of $UF$ we get a probability of measuring $i^*$:
+
+\begin{equation}
+P(i^*) = 1 - \alpha^2_{new}\left(1 - \frac{1}{N}\right) = 1
+\end{equation}
+
+So we should 'guess' correct every time, which is incredible!
+
+So lets do this in reality. I implemented the algorithm on the ibmqx4 with the help of IBMs own tutorials(I'm not smart enough to do this by myself yet)\emph{REF}. Schematically it becomes:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.2]{groverIBM.png}
+\caption{Schematic drawing of the Grover algorithm as used on ibmqx4 processor.}
+\end{figure}
+
+First $i^*$ is given the value $00011$ (this is of course unknown to the system), this is done by gate 2-4. $UF$ is applied once, gate 5-11. The result is then measured. The result is as follows:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{IBMresultat.png}
+\caption{The results form the ibmqx4 processor, showing that the quantum processor quest correctly.}
+\end{figure}
+
+As we can see the the processor measured that $i^*$ should be at $00011$, which is correct. Meaning that the quantum computer managed to guess the correct $i^*$ when 'guessing' on four possible values on the first try!  This is just as the theory expected!
+
+This was totally unnecessary according to the exercise, but is a nice illustration of the power of the quantum computer. It is also incredible that IBM lest the public use there quantum processor, so this was a chance I could not let walk me by.
 \section{Code}\label{sec:code}
 \lstinputlisting{29.py}
 

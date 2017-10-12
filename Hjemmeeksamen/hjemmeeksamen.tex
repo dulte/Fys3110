@@ -935,10 +935,10 @@ The above algorithm is called Grovers algorithm. It is simple to implement on a 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{grover.png}
-\caption{Schematic drawing of the Grover algorithm. Taken from \emph{REF}}
+\caption{Schematic drawing of the Grover algorithm. Taken from \cite{wiki:grover}}
 \end{figure}
 
-Finding this interesting I tried running this on the IBM ibmqx4 5 qubit processor. Due to the limited size of the processor I could only use $N=4$. But it is still impressive. Lets find how many iterations we need of $UF$. From \eqref{eq:UFg} we get (by starting with $\alpha = 1$, $\beta = 0$)
+Finding this interesting I tried running this on the IBM ibmqx4 5 qubit processor \cite{imbq}. Due to the limited size of the processor I could only use $N=4$. But it is still impressive. Lets find how many iterations we need of $UF$. From \eqref{eq:UFg} we get (by starting with $\alpha = 1$, $\beta = 0$)
 
 \begin{equation}
 \alpha_{new} = \left[\left(1 - \frac{4}{N}\right) - \frac{2\cdot 0}{\sqrt{N}}\right] = 0, \qquad \beta_{new} = \left[\frac{2}{\sqrt{4}} + 0\right] = 1
@@ -950,9 +950,9 @@ This means that only after one(!) use of $UF$ we get a probability of measuring 
 P(i^*) = 1 - \alpha^2_{new}\left(1 - \frac{1}{N}\right) = 1
 \end{equation}
 
-So we should 'guess' correct every time, which is incredible!
+So we should 'guess' correct after one iteration, every time, which is incredible!
 
-So lets do this in reality. I implemented the algorithm on the ibmqx4 with the help of IBMs own tutorials(I'm not smart enough to do this by myself yet)\emph{REF}. Schematically it becomes:
+So lets do this in reality. I implemented the algorithm on the ibmqx4 with the help of IBMs own tutorials\cite{video}(I'm not smart enough to do this by myself yet). Schematically it becomes:
 
 \begin{figure}[H]
 \centering
@@ -970,10 +970,12 @@ First $i^*$ is given the value $00011$ (this is of course unknown to the system)
 
 As we can see the the processor measured that $i^*$ should be at $00011$, which is correct. Meaning that the quantum computer managed to guess the correct $i^*$ when 'guessing' on four possible values on the first try!  This is just as the theory expected!
 
-This was totally unnecessary according to the exercise, but is a nice illustration of the power of the quantum computer. It is also incredible that IBM lest the public use there quantum processor, so this was a chance I could not let walk me by.
+This was totally unnecessary according to the exercise, but is a nice illustration of the power of the quantum computer. It is also incredible that IBM lets the public use there quantum processor, so this was an opportunity I could not ignore!
 \section{Code}\label{sec:code}
 \lstinputlisting{29.py}
 
+\bibliography{ref}
+\bibliographystyle{plain}
 
 \end{document}
 

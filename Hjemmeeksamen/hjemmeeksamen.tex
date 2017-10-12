@@ -348,6 +348,95 @@ This turns out to be
 \end{pmatrix}
 \end{equation}
 
+We can then use the energy to add time-evolution to these states under that Hamiltonian:
+
+\begin{equation}
+\ket{1(t)} = \frac{\sqrt{2}}{4}
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix}
+e^{iEt/\hbar}
+-\frac{\sqrt{2}}{4}
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+e^{-iEt/\hbar}
+\end{equation}
+\begin{equation}
+\ket{0(t)} = \frac{2-\sqrt{2}}{4}
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix}
+e^{iEt/\hbar}
++\frac{2+\sqrt{2}}{4}
+\begin{pmatrix}
+1 - \sqrt{2} \\ 1
+\end{pmatrix}
+e^{-iEt/\hbar}
+\end{equation}
+
+Where $E = g\frac{h\mu_B}{2}$. We now want to find the time $t = T$ where these states have evolved into the states given by the H-gate, \eqref{eq:toXdown} and \eqref{eq:toXup}. We can do this two different ways: The first involves just comparing the components of the vectors, and then solving for $t$, but this leaves us with four equations for a single unknown. We can solve just one of these, but we want to be sure that all of the equations gives the same time $t = T$. The other way is to write these as linear combinations of $\ket{\uparrow _x}$ and $\ket{\downarrow _x}$. This will leave us with only two equations, one for $\ket{0(t)}$ and one for $\ket{1(t)}$. So lets do this. First:
+
+\begin{equation}
+\begin{pmatrix}
+1 + \sqrt{2} \\ 1
+\end{pmatrix}
+= (1+\sqrt{2})
+\begin{pmatrix}
+1\\0
+\end{pmatrix}
++
+\begin{pmatrix}
+0\\1
+\end{pmatrix}
+\end{equation}
+\begin{equation}
+=(1+\sqrt{2})
+\frac{1}{2}\left[
+\begin{pmatrix}
+1\\1
+\end{pmatrix}
++\begin{pmatrix}
+1\\-1
+\end{pmatrix}
+\right]
++
+\frac{1}{2}
+\left[
+\begin{pmatrix}
+1\\1
+\end{pmatrix}
+-\begin{pmatrix}
+1\\-1
+\end{pmatrix}
+\right]
+\end{equation}
+
+
+We recognize that $\begin{pmatrix} 1\\1 \end{pmatrix} = \sqrt{2}\ket{\uparrow_x}$ and $\begin{pmatrix} 1\\-1 \end{pmatrix} = \sqrt{2}\ket{\downarrow_x}$
+
+
+\begin{equation}
+= (1+\sqrt{2})
+\frac{1}{2}\left[
+\sqrt{2}\ket{\uparrow_x}
++\sqrt{2}\ket{\downarrow_x}
+\right]
++
+\frac{1}{2}
+\left[
+\sqrt{2}\ket{\uparrow_x}
+-\sqrt{2}\ket{\downarrow_x}
+\right]
+\end{equation}
+\begin{equation}
+= \sqrt{2}\ket{\uparrow_x} + \ket{\uparrow_x} + \ket{\downarrow_x}
+\end{equation}
+
+And similarly
+
+
+
 \section{Exercise 2:}
 
 \subsection{2.1)}\label{sec:21}
@@ -658,6 +747,9 @@ We can then look at how many $n = n^*$ is necessary to get a probability $P(i^*)
 \includegraphics[scale=0.5]{pi.png}
 \caption{The number of times $n^*$ we need to apply $UF$ to get a probability $P(i^*)\geq 0.99$ }
 \end{figure}
+
+\textbf{TA MED TABELL SOM OPPGAVEN BER OM!!!!}
+
 
 We can see that as $N$ increases, so does the number if times we need to apply $UF$ this number $n^*$. It looks quite like a square root, but we need to make sure. For this we use a log-log plot, this is because:
 
